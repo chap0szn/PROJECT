@@ -1,4 +1,4 @@
-ATTACKER_IP = "127.0.0.1"  # Change to your VM IP if needed
+ATTACKER_IP = "192.168.209.188"  #IP address of the attacker
 ATTACKER_PORT = 4444
 
 # Buffer and Retry
