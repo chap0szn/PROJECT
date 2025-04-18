@@ -25,7 +25,7 @@ def socket_bind():
         socket_bind()
 
 def socket_accept():
-    connection , address = s.accept()
+    connection, address = s.accept()
     print("connection has been established | " + "IP" + address[0] + "| Port " + str(address[1]))
     send_commands(connection)
     connection.close
