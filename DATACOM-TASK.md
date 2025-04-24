@@ -7,8 +7,7 @@
 4. Their motives are believed to Conduct cyber espionage to gather intelligence and support Iranian national security and strategic interests.
 
 5. TTP is an acronym for Tactics, Techniques, and Procedure.
-
-APT34 applies their TTP is as follows; 
+   APT34 applies their TTP is as follows; 
 (a) Initial Compromise: Uses spear-phishing emails and watering hole attacks to gain initial access.
 
 (b) Persistence: Implements custom malware, backdoors, and Remote Access Trojans (RATs) to maintain long-term access.
