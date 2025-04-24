@@ -17,6 +17,7 @@
 (d) Data Exfiltration: Employs encrypted channels, FTP, and legitimate cloud services for exfiltration.
 
 7. Security measures to defend against APT34 attacks 
+
 (a) Endpoint Protection: Advanced tools to detect and mitigate malware.
 
 (b) Network Segmentation: Segregating critical assets to limit lateral movement.
